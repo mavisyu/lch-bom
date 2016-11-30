@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+
+      table{
+        font-family:Microsoft JhengHei, PMingLiU;
+      }
+
+      td{
+        width:700px;
+        table-layout:fixed;
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+  <div class="bs-example">
+    <nav id="myNavbar" class="navbar navbar-default" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">連結油壓</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">檔案(X) <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">檔案1</a></li>
+                <li><a href="#">檔案2</a></li>
+                <li><a href="#">檔案3</a></li>
+                <li class="divider"></li>
+                <li><a href="#">檔案4</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">標準件(Y) <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">標準件1</a></li>
+                <li><a href="#">標準件2</a></li>
+                <li><a href="#">標準件3</a></li>
+                <li class="divider"></li>
+                <li><a href="#">標準件4</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">查詢(Z) <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">查詢1</a></li>
+                <li><a href="#">查詢2</a></li>
+                <li><a href="#">查詢3</a></li>
+                <li class="divider"></li>
+                <li><a href="#">查詢4</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
+  </div>
+
+  <table>
+    <tr>
+      <td><input type="checkbox" name=""> 含標準件</td>
+      <td>材料單備註 <input type="text" name=""></td>
+    </tr>
+    <tr>
+      <td>製造編號 <input type="text" name=""></td>
+      <td>客戶簡稱 <input type="text" name=""></td>
+      <td>機台數量 <input type="number" name=""></td>
+    </tr>
+    <tr>
+      <td>上屬編號 <input type="text" name=""></td>
+      <td>上署名稱 <input type="text" name=""></td>
+      <td>製表人員
+        <select>
+          <option value="">user1</option>
+          <option value="">user2</option>
+          <option value="">user3</option>
+        </select>
+      </td>
+    <tr>
+      <td>組件編號 <input type="text" name=""></td>
+      <td>組件名稱 <input type="text" name=""></td>
+      <td>單台組數 <input type="number" name=""></td>
+      <td>圖號 <input type="text" name=""></td>
+      <td>圖格
+        <select>
+          <option value="">A1</option>
+          <option value="">A2</option>
+          <option value="">A3</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+  <table class="table-bordered">
+    <thead>
+    <tr>
+      <th>階層</th>
+      <th>件號</th>
+      <th>品名</th>
+      <th>規格</th>
+      <th>材質</th>
+      <th>數量</th>
+      <th>單重</th>
+      <th>圖號</th>
+      <th>來源別</th>
+      <th>材料編號</th>
+      <th>圖格</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>AA11-SB138</td>
+        <td>底座</td>
+        <td>1900*3450*6400</td>
+        <td>SS400</td>
+        <td>1</td>
+        <td>31712.7</td>
+        <td>SB138-AA11</td>
+        <td>M</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  </body>
+
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+</html>
