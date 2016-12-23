@@ -1,20 +1,20 @@
 {
-  "name": "lch-bom",
+  "name": "electron-quick-start",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
   "author": "Mavis",
+  "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^1.4.1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "editable-grid": "^2.0.5",
+    "lodash": "^4.17.2",
+    "xlsx": "^0.8.0"
   }
 }
