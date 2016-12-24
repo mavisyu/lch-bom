@@ -24,7 +24,7 @@ ipc.on('grid-data',function(event, level0, level1, level2) {
                   f: row[4],
                   g: row[5],
                   h: row[6],
-                  i: '',
+                  i: 'M',
                   j: '',
                   k: ''
                 };
@@ -40,7 +40,7 @@ ipc.on('grid-data',function(event, level0, level1, level2) {
                       f: row[4],
                       g: row[5],
                       h: '',
-                      i: '',
+                      i: 'M',
                       j: '',
                       k: ''
                     };
@@ -61,9 +61,9 @@ ipc.on('grid-data',function(event, level0, level1, level2) {
         { id: 'e', title: '材質' },
         { id: 'f', title: '數量' },
         { id: 'g', title: '單重' },
-        { id: 'h', title: '圖號' },
-        { id: 'i', title: '來源別' },
-        { id: 'j', title: '材料編號' },
+        { id: 'h', title: '圖號' }, // If comment has dash(-) display comment, else display empty
+        { id: 'i', title: '來源別' }, // Default as M if ERP exist show the ERP instead
+        { id: 'j', title: '材料編號' }, // Find ERP by Case Number to find corresponding value, other wise empty showed
         { id: 'k', title: '圖格' }
       ],
       data: data
