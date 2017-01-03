@@ -82,3 +82,11 @@ if (files) {
     }
   })
 })
+
+ipc.on('setting-library-path', function (event) {
+  dialog.showOpenDialog({
+    properties: ['openDirectory']
+  }, function (files) {
+    if (files) event.sender.send('selected-directory', files)
+  })
+});

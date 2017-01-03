@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>設定</title>
+
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+  <script>
+    window.$ = window.jQuery = require('jquery');
+  </script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+  <div class="container">
+    <form class="form-inline">
+      <!--<div class="form-group">-->
+        <label for="library-path">資料庫(Library)檔路徑</label>
+        <input type="text" class="form-control" id="library-path" placeholder="路徑" style="width: 50%;" readonly>
+        <button type="button" id="select-directory" class="btn btn-info">選擇</button>
+      <!--</div>-->
+    </form>
+  </div>
+  <div class="container">
+    <button type="button" class="btn btn-primary" id="save">存檔</button>
+    <a class="btn btn-default" href="index.html">回主畫面</a>
+  </div>
+</body>
+<script>
+  // You can also require other files to run in this process
+  require('./settings_renderer.js')
+</script>
+</html>
