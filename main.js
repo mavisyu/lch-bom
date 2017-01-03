@@ -8,6 +8,8 @@ const BrowserWindow = electron.BrowserWindow
 // ipc
 const ipc = require('electron').ipcMain
 const dialog = require('electron').dialog
+const fs = require("fs");
+const data = fs.readFileSync('conf/settings');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -17,8 +19,13 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  if (data.toString()) {
+    // and load the index.html of the app.
+    mainWindow.loadURL(`file://${__dirname}/index.html`)
+  }
+  else {
+    mainWindow.loadURL(`file://${__dirname}/settings.html`)
+  }
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
