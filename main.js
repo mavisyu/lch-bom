@@ -97,3 +97,7 @@ ipc.on('setting-library-path', function (event) {
     if (files) event.sender.send('selected-directory', files)
   })
 });
+
+ipc.on('back2index', function (event) {
+  mainWindow.loadURL(`file://${__dirname}/index.html`)
+});
