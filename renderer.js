@@ -4,16 +4,7 @@ const datepicker = require('date-selector');
 const $ = require('jquery');
 const ipc = require('electron').ipcRenderer;
 
-// Constant variable
-const selectDirBtn = document.getElementById('select-directory');
-
 datepicker();
-
-
-selectDirBtn.addEventListener('click', function (event) {
-  // send event to main.js
-  ipc.send('open-file-dialog');
-})
 
 // Receive event from main.js
 ipc.on('grid-data',function(event, level0, level1, level2) {

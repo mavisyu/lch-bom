@@ -4,6 +4,7 @@ const electron = require('electron')
 const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
+const Menu = electron.Menu
 const ipc = require('electron').ipcMain
 const dialog = require('electron').dialog
 const fs = require("fs");
@@ -59,28 +60,186 @@ app.on('activate', function () {
   }
 })
 
+// Menu
+let template = [
+  {
+    label: '檔案',
+    submenu: [
+      {
+        label: '開啟料單文字檔',
+        // role: 'undo'
+      },
+      {
+        label: '開啟 3D-Excel 檔',
+        // role: 'redo'
+        click: function (item, focusedWindow) {
+          if (focusedWindow) {
+            dialog.showOpenDialog({
+                properties: ['openFile']
+              },
+              function (files) {
+                if (files) {
+                  var bomExcelUtil = new BomExcelUtil();
+                  var file = files[0];
+                  var dir = file.slice(0, file.lastIndexOf('/') + 1);
+                  var level0 = bomExcelUtil.getTopLevel(file, [], '0');
+
+                  const topLevelKeys = bomExcelUtil.getTopLevelKeys(level0);
+                  var level1 = bomExcelUtil.getSubsequentLevel(dir, topLevelKeys, '1');
+                  const level1Keys = bomExcelUtil.getSubLevelKeys(level1);
+                  var level2 = bomExcelUtil.getSubsequentLevel(dir, level1Keys, '2');
+                  mainWindow.webContents.send('grid-data', level0, level1, level2);
+                }
+              })
+          }
+        }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: '儲存成文字檔',
+      },
+      {
+        label: '儲存成 Excel 檔',
+      }],
+  },
+  {
+    label: '標準件',
+    submenu: [
+      {
+        label: '標準件列印'
+      },
+      {
+        label: '標準件清單'
+      }
+    ]
+  },
+  {
+    label: '樹狀圖查詢',
+    submenu: [
+      {
+        label: '料號查詢'
+      },
+      {
+        label: '件號查詢'
+      }
+    ]
+  },
+  {
+    label: '報表',
+    submenu: [
+      {
+        label: '列印材料單'
+      },
+      {
+        label: '列印分發紀錄表'
+      },
+      {
+        label: '列印設計課清單表'
+      }
+    ]
+  },
+  {
+    label: '設定',
+    submenu: [
+      {
+        label: '標準件號資料庫'
+      },
+      {
+        label: 'ERP 料號庫'
+      },
+      {
+        label: '來源別資料庫'
+      },
+      { type: 'separator' },
+      {
+        label: '系統設定',
+        click: function (item, focusedWindow) {
+          mainWindow.loadURL(`file://${__dirname}/settings.html`)
+        }
+      }
+    ]
+  }
+]
+
+function addUpdateMenuItems (items, position) {
+  if (process.mas) return
+  items.splice.apply(items, [position, 0])
+}
+
+if (process.platform === 'darwin') {
+  const name = electron.app.getName()
+  template.unshift({
+    label: name,
+    submenu: [{
+      label: `About ${name}`,
+      role: 'about'
+    }, {
+      type: 'separator'
+    }, {
+      label: 'Services',
+      role: 'services',
+      submenu: []
+    }, {
+      type: 'separator'
+    }, {
+      label: `Hide ${name}`,
+      accelerator: 'Command+H',
+      role: 'hide'
+    }, {
+      label: 'Hide Others',
+      accelerator: 'Command+Alt+H',
+      role: 'hideothers'
+    }, {
+      label: 'Show All',
+      role: 'unhide'
+    }, {
+      type: 'separator'
+    }, {
+      label: 'Quit',
+      accelerator: 'Command+Q',
+      click: function () {
+        app.quit()
+      }
+    }]
+  })
+}
+
+if (process.platform === 'win32') {
+  const helpMenu = template[template.length - 1].submenu
+  addUpdateMenuItems(helpMenu, 0)
+}
+
+app.on('ready', function () {
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
+})
+// End menu
+
 // Receive event from renderer.js
 ipc.on('open-file-dialog', function (event) {
   dialog.showOpenDialog({
-    properties: ['openFile']
-  }, function (files) {
-    console.log("files", JSON.stringify(files));
-if (files) {
-      var bomExcelUtil = new BomExcelUtil();
-      var file = files[0];
-      var dir = file.slice(0, file.lastIndexOf('/') + 1);
-      var level0 = bomExcelUtil.getTopLevel(file, [], '0');
+      properties: ['openFile']
+    },
+    function (files) {
+      console.log("files", JSON.stringify(files));
+      if (files) {
+        var bomExcelUtil = new BomExcelUtil();
+        var file = files[0];
+        var dir = file.slice(0, file.lastIndexOf('/') + 1);
+        var level0 = bomExcelUtil.getTopLevel(file, [], '0');
 
-      const topLevelKeys = bomExcelUtil.getTopLevelKeys(level0);
-      var level1 = bomExcelUtil.getSubsequentLevel(dir, topLevelKeys, '1');
-      const level1Keys = bomExcelUtil.getSubLevelKeys(level1);
-      var level2 = bomExcelUtil.getSubsequentLevel(dir, level1Keys, '2');
+        const topLevelKeys = bomExcelUtil.getTopLevelKeys(level0);
+        var level1 = bomExcelUtil.getSubsequentLevel(dir, topLevelKeys, '1');
+        const level1Keys = bomExcelUtil.getSubLevelKeys(level1);
+        var level2 = bomExcelUtil.getSubsequentLevel(dir, level1Keys, '2');
 
-      // Send event to renderer.js
-      event.sender.send('grid-data', level0, level1, level2);
-    }
+        // Send event to renderer.js
+        event.sender.send('grid-data', level0, level1, level2);
+      }
+    })
   })
-})
 
 // Receive events from settings_renderer.js
 ipc.on('setting-library-path', function (event) {
