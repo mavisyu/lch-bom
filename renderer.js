@@ -1,18 +1,21 @@
-var _ = require('lodash');
-var Grid = require('editable-grid'),
-datepicker = require('date-selector'),
-$ = require('jquery');
-const ipc = require('electron').ipcRenderer
+const _ = require('lodash');
+const Grid = require('editable-grid');
+const datepicker = require('date-selector');
+const $ = require('jquery');
+const ipc = require('electron').ipcRenderer;
+
+// Constant variable
+const selectDirBtn = document.getElementById('select-directory');
 
 datepicker();
 
 
-const selectDirBtn = document.getElementById('select-directory')
-
 selectDirBtn.addEventListener('click', function (event) {
-  ipc.send('open-file-dialog')
+  // send event to main.js
+  ipc.send('open-file-dialog');
 })
 
+// Receive event from main.js
 ipc.on('grid-data',function(event, level0, level1, level2) {
   var data = [];
   level0.forEach(function(row) {
@@ -82,4 +85,4 @@ ipc.on('grid-data',function(event, level0, level1, level2) {
     });
     grid.render();
   }) ($("#grid"));
-})
+});

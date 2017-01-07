@@ -4,8 +4,6 @@ const electron = require('electron')
 const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
-
-// ipc
 const ipc = require('electron').ipcMain
 const dialog = require('electron').dialog
 const fs = require("fs");
@@ -61,8 +59,7 @@ app.on('activate', function () {
   }
 })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+// Receive event from renderer.js
 ipc.on('open-file-dialog', function (event) {
   dialog.showOpenDialog({
     properties: ['openFile']
@@ -73,23 +70,19 @@ if (files) {
       var file = files[0];
       var dir = file.slice(0, file.lastIndexOf('/') + 1);
       var level0 = bomExcelUtil.getTopLevel(file, [], '0');
-      console.log("level0", level0);
+
       const topLevelKeys = bomExcelUtil.getTopLevelKeys(level0);
-      console.log("top level keys", topLevelKeys)
       var level1 = bomExcelUtil.getSubsequentLevel(dir, topLevelKeys, '1');
       const level1Keys = bomExcelUtil.getSubLevelKeys(level1);
-
-      console.log("level 1", level1);
-      console.log("level 1 keys", level1Keys);
       var level2 = bomExcelUtil.getSubsequentLevel(dir, level1Keys, '2');
 
-      console.log("level 2", level2);
-
+      // Send event to renderer.js
       event.sender.send('grid-data', level0, level1, level2);
     }
   })
 })
 
+// Receive events from settings_renderer.js
 ipc.on('setting-library-path', function (event) {
   dialog.showOpenDialog({
     properties: ['openDirectory']
