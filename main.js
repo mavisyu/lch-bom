@@ -1,4 +1,4 @@
-var BomExcelUtil = require('./bom_excel_util');
+var BomExcelUtil = require('./app/util/bom_excel_util');
 var BomTextUtil = require('./app/util/bom_text_util');
 const electron = require('electron')
 // Module to control application life.
@@ -21,10 +21,10 @@ function createWindow () {
 
   if (data.toString()) {
     // and load the index.html of the app.
-    mainWindow.loadURL(`file://${__dirname}/index.html`)
+    mainWindow.loadURL(`file://${__dirname}/app/index.html`)
   }
   else {
-    mainWindow.loadURL(`file://${__dirname}/settings.html`)
+    mainWindow.loadURL(`file://${__dirname}/app/settings/settings.html`)
   }
 
   // Open the DevTools.
@@ -175,7 +175,7 @@ let template = [
       {
         label: '系統設定',
         click: function (item, focusedWindow) {
-          mainWindow.loadURL(`file://${__dirname}/settings.html`)
+          mainWindow.loadURL(`file://${__dirname}/app/settings/settings.html`)
         }
       }
     ]
@@ -269,5 +269,5 @@ ipc.on('setting-library-path', function (event) {
 });
 
 ipc.on('back2index', function (event) {
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  mainWindow.loadURL(`file://${__dirname}/app/index.html`)
 });
