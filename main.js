@@ -1,4 +1,5 @@
 var BomExcelUtil = require('./bom_excel_util');
+var BomTextUtil = require('./app/util/bom_text_util');
 const electron = require('electron')
 // Module to control application life.
 const app = electron.app
@@ -27,7 +28,7 @@ function createWindow () {
   }
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -67,7 +68,24 @@ let template = [
     submenu: [
       {
         label: '開啟料單文字檔',
-        // role: 'undo'
+        click: function (item, focusedWindow) {
+          if (focusedWindow) {
+            dialog.showOpenDialog({
+                properties: ['openFile'],
+                filters: [ { name: "Text", extensions: ['txt'] }]
+              },
+              function (files) {
+                if (files) {
+                  var bomTextUtil = new BomTextUtil();
+                  var file = files[0];
+
+                  bomTextUtil.getData(file, function(data) {
+                    mainWindow.webContents.send('grid-data-txt', data);
+                  });
+                }
+              })
+          }
+        }
       },
       {
         label: '開啟 3D-Excel 檔',
@@ -75,7 +93,8 @@ let template = [
         click: function (item, focusedWindow) {
           if (focusedWindow) {
             dialog.showOpenDialog({
-                properties: ['openFile']
+                properties: ['openFile'],
+                filters: [ { name: "Excel", extensions: ['xls', 'xlsx'] }]
               },
               function (files) {
                 if (files) {
@@ -223,7 +242,6 @@ ipc.on('open-file-dialog', function (event) {
       properties: ['openFile']
     },
     function (files) {
-      console.log("files", JSON.stringify(files));
       if (files) {
         var bomExcelUtil = new BomExcelUtil();
         var file = files[0];

@@ -91,33 +91,48 @@
 <table>
   <tr>
     <td><input type="checkbox" name=""> 含標準件</td>
-    <td>材料單備註 <input type="text" name=""></td>
+    <td>材料單備註 <input type="text" id="material-note"></td>
   </tr>
   <tr>
-    <td>製造編號 <input type="text" name=""></td>
-    <td>客戶簡稱 <input type="text" name=""></td>
-    <td>機台數量 <input type="number" name=""></td>
+    <td>製造編號 <input type="text" id="manufacture-num"></td>
+    <td>客戶簡稱 <input type="text" id="client-abbre"></td>
+    <td>機台數量 <input type="number" id="machine-num"></td>
   </tr>
   <tr>
-    <td>上屬編號 <input type="text" name=""></td>
-    <td>上署名稱 <input type="text" name=""></td>
+    <td>上屬編號 <input type="text" id="upper-num"></td>
+    <td>上署名稱 <input type="text" id="upper-name"></td>
     <td>製表人員
-      <select>
-        <option value="">user1</option>
-        <option value="">user2</option>
-        <option value="">user3</option>
+      <select id="in-charge">
+        <option value="吳鑫元">吳鑫元</option>
+        <option value="呂玉琴">呂玉琴</option>
+        <option value="李志高">李志高</option>
+        <option value="林慶宏">林慶宏</option>
+        <option value="施宗呈">施宗呈</option>
+        <option value="張建文">張建文</option>
+        <option value="梁深造">梁深造</option>
+        <option value="許志誠">許志誠</option>
+        <option value="游郁靜">游郁靜</option>
+        <option value="黃世宗">黃世宗</option>
+        <option value="黃則盛">黃則盛</option>
+        <option value="黃偉哲">黃偉哲</option>
+        <option value="黃陳文">黃陳文</option>
+        <option value="楊至傑">楊至傑</option>
+        <option value="廖正義">廖正義</option>
+        <option value="闕建長">闕建長</option>
+        <option value="胡生文">胡生文</option>
       </select>
     </td>
   <tr>
-    <td>組件編號 <input type="text" name=""></td>
-    <td>組件名稱 <input type="text" name=""></td>
-    <td>單台組數 <input type="number" name=""></td>
-    <td>圖號 <input type="text" name=""></td>
+    <td>組件編號 <input type="text" id="assemble-num"></td>
+    <td>組件名稱 <input type="text" id="assemble-name"></td>
+    <td>單台組數 <input type="number" id="single-num"></td>
+    <td>圖號 <input type="text" id="pic-num"></td>
     <td>圖格
-      <select>
-        <option value="">A1</option>
-        <option value="">A2</option>
-        <option value="">A3</option>
+      <select id="pic-cell">
+        <option value="A1">A1</option>
+        <option value="A2">A2</option>
+        <option value="A3">A3</option>
+        <option value="A4">A4</option>
       </select>
     </td>
   </tr>
