@@ -57,23 +57,7 @@ ipc.on('grid-data',function(event, level0, level1, level2) {
   });
 
   (function (el) {
-    var grid = new Grid({
-      el: el,
-      columns: [
-        { id: 'a', title: '階層', width: '9.1%' },
-        { id: 'b', title: '件號', width: '9.1%' },
-        { id: 'c', title: '品名', width: '9.1%' },
-        { id: 'd', title: '規格', width: '9.1%' },
-        { id: 'e', title: '材質', width: '9.1%' },
-        { id: 'f', title: '數量', width: '9.1%' },
-        { id: 'g', title: '單重', width: '9.1%' },
-        { id: 'h', title: '圖號', width: '9.1%' }, // If comment has dash(-) display comment, else display empty
-        { id: 'i', title: '來源別', width: '9.1%' }, // Default as M if ERP exist show the ERP instead
-        { id: 'j', title: '材料編號', width: '9.1%' }, // Find ERP by Case Number to find corresponding value, other wise empty showed
-        { id: 'k', title: '圖格', width: '9.1%' }
-      ],
-      data: data
-    });
+    var grid = newGrid(el, data);
     grid.render();
   }) ($("#grid"));
 });
@@ -113,25 +97,17 @@ ipc.on('grid-data-txt',function(event, txtData) {
   });
 
   (function (el) {
-    var grid = new Grid({
-      el: el,
-      columns: [
-        { id: 'a', title: '階層', width: '9.1%' },
-        { id: 'b', title: '件號', width: '9.1%' },
-        { id: 'c', title: '品名', width: '9.1%' },
-        { id: 'd', title: '規格', width: '9.1%' },
-        { id: 'e', title: '材質', width: '9.1%' },
-        { id: 'f', title: '數量', width: '9.1%' },
-        { id: 'g', title: '單重', width: '9.1%' },
-        { id: 'h', title: '圖號', width: '9.1%' }, // If comment has dash(-) display comment, else display empty
-        { id: 'i', title: '來源別', width: '9.1%' }, // Default as M if ERP exist show the ERP instead
-        { id: 'j', title: '材料編號', width: '9.1%' }, // Find ERP by Case Number to find corresponding value, other wise empty showed
-        { id: 'k', title: '圖格', width: '9.1%' }
-      ],
-      data: data
-    });
+    var grid = newGrid(el, data);
     grid.render();
   }) ($("#grid"));
+});
+
+ipc.on('export-excel',function(event) {
+  $("#grid").find(".editable-body-table").find('tr').each(function (i, v) {
+    $(this).find('input').each(function (ii, vv) {
+      console.log("input val", $(this).val());
+    });
+  })
 });
 
 var setSelected = function(options, value) {
@@ -141,4 +117,29 @@ var setSelected = function(options, value) {
       break;
     }
   }
+}
+
+var newGrid = function(el, data) {
+  return new Grid({
+    stateManager: {
+      isEditable: function(rowId, colId) {
+        return true;
+      }
+    },
+    el: el,
+    columns: [
+      { id: 'a', title: '階層', width: '9.1%' },
+      { id: 'b', title: '件號', width: '9.1%' },
+      { id: 'c', title: '品名', width: '9.1%' },
+      { id: 'd', title: '規格', width: '9.1%' },
+      { id: 'e', title: '材質', width: '9.1%' },
+      { id: 'f', title: '數量', width: '9.1%' },
+      { id: 'g', title: '單重', width: '9.1%' },
+      { id: 'h', title: '圖號', width: '9.1%' }, // If comment has dash(-) display comment, else display empty
+      { id: 'i', title: '來源別', width: '9.1%' }, // Default as M if ERP exist show the ERP instead
+      { id: 'j', title: '材料編號', width: '9.1%' }, // Find ERP by Case Number to find corresponding value, other wise empty showed
+      { id: 'k', title: '圖格', width: '9.1%' }
+    ],
+    data: data
+  });
 }

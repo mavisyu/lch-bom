@@ -121,6 +121,10 @@ let template = [
       },
       {
         label: '儲存成 Excel 檔',
+        click: function(item, focusedWindow) {
+          // TODO open dialog to choose export directory
+          mainWindow.webContents.send('export-excel');
+        }
       }],
   },
   {
