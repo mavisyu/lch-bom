@@ -4,6 +4,8 @@ const datepicker = require('date-selector');
 const $ = require('jquery');
 const ipc = require('electron').ipcRenderer;
 
+var BomExcelUtil = require('./util/bom_excel_util');
+
 datepicker();
 
 // Receive event from main.js
@@ -102,12 +104,18 @@ ipc.on('grid-data-txt',function(event, txtData) {
   }) ($("#grid"));
 });
 
-ipc.on('export-excel',function(event) {
+ipc.on('export-excel',function(event, path) {
+  let exportData = [];
   $("#grid").find(".editable-body-table").find('tr').each(function (i, v) {
+    let row = [];
     $(this).find('input').each(function (ii, vv) {
-      console.log("input val", $(this).val());
+      row.push($(this).val());
     });
+    exportData.push(row);
   })
+
+  var bomExcelUtil = new BomExcelUtil();
+  bomExcelUtil.exportBom(path, exportData);
 });
 
 var setSelected = function(options, value) {

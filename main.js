@@ -122,8 +122,11 @@ let template = [
       {
         label: '儲存成 Excel 檔',
         click: function(item, focusedWindow) {
-          // TODO open dialog to choose export directory
-          mainWindow.webContents.send('export-excel');
+          dialog.showOpenDialog({
+            properties: ['openDirectory']
+          }, function (path) {
+            mainWindow.webContents.send('export-excel', path);
+          })
         }
       }],
   },
@@ -267,8 +270,8 @@ ipc.on('open-file-dialog', function (event) {
 ipc.on('setting-library-path', function (event) {
   dialog.showOpenDialog({
     properties: ['openDirectory']
-  }, function (files) {
-    if (files) event.sender.send('selected-directory', files)
+  }, function (path) {
+    if (files) event.sender.send('selected-directory', path)
   })
 });
 
