@@ -118,6 +118,13 @@ let template = [
       },
       {
         label: '儲存成文字檔',
+        click: function(item, focusedWindow) {
+          dialog.showOpenDialog({
+            properties: ['openDirectory']
+          }, function (path) {
+            mainWindow.webContents.send('export-txt', path);
+          })
+        }
       },
       {
         label: '儲存成 Excel 檔',

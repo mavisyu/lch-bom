@@ -5,6 +5,7 @@ const $ = require('jquery');
 const ipc = require('electron').ipcRenderer;
 
 var BomExcelUtil = require('./util/bom_excel_util');
+var BomTextUtil = require('./util/bom_text_util');
 
 datepicker();
 
@@ -80,20 +81,21 @@ ipc.on('grid-data-txt',function(event, txtData) {
   var picCell = document.getElementById('pic-cell');
   setSelected(picCell.children, txtData.fields[10]);
 
+  var bomTextUtil = new BomTextUtil();
   var data = [];
   txtData.data.forEach(function (row) {
     const obj = {
-      a: row[0],
-      b: row[1],
-      c: row[2],
-      d: row[3],
-      e: row[4],
-      f: row[5],
-      g: row[6],
-      h: row[7],
-      i: row[8],
-      j: row[9],
-      k: row[10]
+      a: bomTextUtil.replaceDoubleQuote(row[0]),
+      b: bomTextUtil.replaceDoubleQuote(row[1]),
+      c: bomTextUtil.replaceDoubleQuote(row[2]),
+      d: bomTextUtil.replaceDoubleQuote(row[3]),
+      e: bomTextUtil.replaceDoubleQuote(row[4]),
+      f: bomTextUtil.replaceDoubleQuote(row[5]),
+      g: bomTextUtil.replaceDoubleQuote(row[6]),
+      h: bomTextUtil.replaceDoubleQuote(row[7]),
+      i: bomTextUtil.replaceDoubleQuote(row[8]),
+      j: bomTextUtil.replaceDoubleQuote(row[9]),
+      k: bomTextUtil.replaceDoubleQuote(row[10])
     };
     data.push(obj);
   });
@@ -116,6 +118,37 @@ ipc.on('export-excel',function(event, path) {
 
   var bomExcelUtil = new BomExcelUtil();
   bomExcelUtil.exportBom(path, exportData);
+});
+
+ipc.on('export-txt',function(event, path) {
+  let exportData = [];
+  let headerRow = [];
+  // document.getElementById('include-standard-case')
+  // document.getElementById('material-note')
+  headerRow.push(document.getElementById('manufacture-num').value)
+  headerRow.push(document.getElementById('upper-num').value)
+  headerRow.push(document.getElementById('assemble-num').value)
+
+  headerRow.push(document.getElementById('client-abbre').value)
+  headerRow.push(document.getElementById('upper-name').value)
+  headerRow.push(document.getElementById('assemble-name').value)
+
+  headerRow.push(document.getElementById('machine-num').value)
+  headerRow.push(document.getElementById('in-charge').value)
+  headerRow.push(document.getElementById('single-num').value)
+  headerRow.push(document.getElementById('pic-num').value)
+  headerRow.push(document.getElementById('pic-cell').value)
+
+  $("#grid").find(".editable-body-table").find('tr').each(function (i, v) {
+    let row = [];
+    $(this).find('input').each(function (ii, vv) {
+      row.push($(this).val());
+    });
+    exportData.push(row);
+  })
+
+  var bomTextUtil = new BomTextUtil();
+  bomTextUtil.exportBom(path, headerRow, exportData);
 });
 
 var setSelected = function(options, value) {
