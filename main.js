@@ -271,7 +271,7 @@ ipc.on('setting-library-path', function (event) {
   dialog.showOpenDialog({
     properties: ['openDirectory']
   }, function (path) {
-    if (files) event.sender.send('selected-directory', path)
+    if (path) event.sender.send('selected-directory', path)
   })
 });
 
