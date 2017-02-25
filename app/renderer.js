@@ -138,6 +138,7 @@ ipc.on('design-material-list-content',function(event, path) {
   };
   var reportUtil = new ReportUtil();
   reportUtil.printDesignMaterialList(reportData);
+  ipc.send('print-pdf', 'design_material_list.pdf')
 });
 
 var setSelected = function(options, value) {

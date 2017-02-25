@@ -10,6 +10,7 @@ const ipc = require('electron').ipcMain
 const dialog = require('electron').dialog
 const fs = require("fs");
 const data = fs.readFileSync('conf/settings');
+const PDFWindow = require('electron-pdf-window')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -280,7 +281,18 @@ ipc.on('open-file-dialog', function (event) {
         event.sender.send('grid-data', level0, level1, level2);
       }
     })
-  })
+})
+
+ipc.on('print-pdf', function (event, filename) {
+  setTimeout(function() {
+    const win = new PDFWindow({
+      width: 800,
+      height: 600
+    })
+
+    win.loadURL(`file://${__dirname}/${filename}`)
+  }, 1000)
+})
 
 // Receive events from settings_renderer.js
 ipc.on('setting-library-path', function (event) {
