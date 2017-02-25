@@ -2,3 +2,4 @@ node_modules
 .idea/
 lch-bom.iml
 .DS_Store
+*.pdf

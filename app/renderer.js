@@ -6,6 +6,7 @@ const ipc = require('electron').ipcRenderer;
 
 var BomExcelUtil = require('./util/bom_excel_util');
 var BomTextUtil = require('./util/bom_text_util');
+var ReportUtil = require('./util/report_util');
 
 datepicker();
 
@@ -121,34 +122,22 @@ ipc.on('export-excel',function(event, path) {
 });
 
 ipc.on('export-txt',function(event, path) {
-  let exportData = [];
-  let headerRow = [];
-  // document.getElementById('include-standard-case')
-  // document.getElementById('material-note')
-  headerRow.push(document.getElementById('manufacture-num').value)
-  headerRow.push(document.getElementById('upper-num').value)
-  headerRow.push(document.getElementById('assemble-num').value)
-
-  headerRow.push(document.getElementById('client-abbre').value)
-  headerRow.push(document.getElementById('upper-name').value)
-  headerRow.push(document.getElementById('assemble-name').value)
-
-  headerRow.push(document.getElementById('machine-num').value)
-  headerRow.push(document.getElementById('in-charge').value)
-  headerRow.push(document.getElementById('single-num').value)
-  headerRow.push(document.getElementById('pic-num').value)
-  headerRow.push(document.getElementById('pic-cell').value)
-
-  $("#grid").find(".editable-body-table").find('tr').each(function (i, v) {
-    let row = [];
-    $(this).find('input').each(function (ii, vv) {
-      row.push($(this).val());
-    });
-    exportData.push(row);
-  })
+  let exportData = getData();;
+  let headerRow = getHeader()
 
   var bomTextUtil = new BomTextUtil();
   bomTextUtil.exportBom(path, headerRow, exportData);
+});
+
+ipc.on('design-material-list-content',function(event, path) {
+  let content = getData();
+  let header = getHeader();
+  var reportData = {
+    header: header,
+    content: content
+  };
+  var reportUtil = new ReportUtil();
+  reportUtil.printDesignMaterialList(reportData);
 });
 
 var setSelected = function(options, value) {
@@ -158,6 +147,36 @@ var setSelected = function(options, value) {
       break;
     }
   }
+}
+
+var getHeader = function() {
+  const header = [];
+  header.push(document.getElementById('manufacture-num').value)
+  header.push(document.getElementById('upper-num').value)
+  header.push(document.getElementById('assemble-num').value)
+
+  header.push(document.getElementById('client-abbre').value)
+  header.push(document.getElementById('upper-name').value)
+  header.push(document.getElementById('assemble-name').value)
+
+  header.push(document.getElementById('machine-num').value)
+  header.push(document.getElementById('in-charge').value)
+  header.push(document.getElementById('single-num').value)
+  header.push(document.getElementById('pic-num').value)
+  header.push(document.getElementById('pic-cell').value)
+  return header;
+}
+
+var getData = function() {
+  let content = [];
+  $("#grid").find(".editable-body-table").find('tr').each(function (i, v) {
+    let row = [];
+    $(this).find('input').each(function (ii, vv) {
+      row.push($(this).val());
+    });
+    content.push(row);
+  })
+  return content;
 }
 
 var newGrid = function(el, data) {

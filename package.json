@@ -19,6 +19,8 @@
     "moment-timezone": "^0.5.11",
     "mv": "^2.1.1",
     "nedb": "^1.8.0",
+    "pdfmake": "^0.1.25",
+    "source-han-sans-sc-ttf": "^1.0.0",
     "xlsx": "^0.8.0"
   }
 }

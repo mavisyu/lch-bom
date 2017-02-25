@@ -163,13 +163,22 @@ let template = [
     label: '報表',
     submenu: [
       {
-        label: '列印材料單'
+        label: '列印材料單',
+        click: function(item, focusedWindow) {
+          mainWindow.webContents.send('design-material-list-content');
+        }
       },
       {
-        label: '列印分發紀錄表'
+        label: '列印分發紀錄表',
+        click: function(item, focusedWindow) {
+
+        }
       },
       {
-        label: '列印設計課清單表'
+        label: '列印設計課清單表',
+        click: function(item, focusedWindow) {
+          mainWindow.webContents.print();
+        }
       }
     ]
   },
