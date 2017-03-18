@@ -141,6 +141,30 @@ ipc.on('design-material-list-content',function(event, path) {
   ipc.send('print-pdf', 'design_material_list.pdf')
 });
 
+ipc.on('photo-assign-content',function(event, path) {
+  let content = getData();
+  let header = getHeader();
+  var reportData = {
+    header: header,
+    content: content
+  };
+  var reportUtil = new ReportUtil();
+  reportUtil.printPhotoAssign(reportData);
+  ipc.send('print-pdf', 'photo_assign.pdf')
+});
+
+ipc.on('design-dept-pic',function(event, path) {
+  let content = getData();
+  let header = getHeader();
+  var reportData = {
+    header: header,
+    content: content
+  };
+  var reportUtil = new ReportUtil();
+  reportUtil.printDesignDeptPic(reportData);
+  ipc.send('print-pdf', 'design_dept_pic.pdf')
+});
+
 var setSelected = function(options, value) {
   for (var i = 0; i < options.length; i++) {
     if (options[i].value === value) {

@@ -172,13 +172,13 @@ let template = [
       {
         label: '列印分發紀錄表',
         click: function(item, focusedWindow) {
-
+          mainWindow.webContents.send('photo-assign-content');
         }
       },
       {
         label: '列印設計課清單表',
         click: function(item, focusedWindow) {
-          mainWindow.webContents.print();
+          mainWindow.webContents.send('design-dept-pic');
         }
       }
     ]
