@@ -187,13 +187,22 @@ let template = [
     label: '設定',
     submenu: [
       {
-        label: '標準件號資料庫'
+        label: '標準件號資料庫',
+        click: function (item, focusedWindow) {
+          mainWindow.loadURL(`file://${__dirname}/app/settings/standard_case.html`)
+        }
       },
       {
-        label: 'ERP 料號庫'
+        label: 'ERP 料號庫',
+        click: function (item, focusedWindow) {
+          mainWindow.loadURL(`file://${__dirname}/app/settings/erp_material.html`)
+        }
       },
       {
-        label: '來源別資料庫'
+        label: '來源別資料庫',
+        click: function (item, focusedWindow) {
+          mainWindow.loadURL(`file://${__dirname}/app/settings/source.html`)
+        }
       },
       { type: 'separator' },
       {
