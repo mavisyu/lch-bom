@@ -4,7 +4,7 @@ const fs = require("fs");
 const mv = require('mv');
 
 // Constant variables
-const setting = fs.readFileSync('conf/settings');
+const setting = fs.readFileSync(`${__dirname}/../../conf/settings`);
 const dbFileName = "/lch.db";
 const selectDirBtn = document.getElementById('select-directory')
 const saveBtn = document.getElementById('save')

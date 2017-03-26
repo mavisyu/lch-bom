@@ -9,7 +9,7 @@ const Menu = electron.Menu
 const ipc = require('electron').ipcMain
 const dialog = require('electron').dialog
 const fs = require("fs");
-const data = fs.readFileSync('conf/settings');
+const data = fs.readFileSync(`${__dirname}/conf/settings`);
 const PDFWindow = require('electron-pdf-window')
 
 // Keep a global reference of the window object, if you don't, the window will
