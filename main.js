@@ -15,10 +15,12 @@ const PDFWindow = require('electron-pdf-window')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+let bomData
 
 function createWindow () {
+  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({width: width, height: height})
 
   if (data.toString()) {
     // and load the index.html of the app.
@@ -153,7 +155,24 @@ let template = [
     label: '樹狀圖查詢',
     submenu: [
       {
-        label: '料號查詢'
+        label: '料號查詢',
+        click: function(item,focusedWindow) {
+          let child = new BrowserWindow({parent: mainWindow, width: 400, height: 800})
+          child.loadURL(`file://${__dirname}/app/tree.html`)
+          child.webContents.openDevTools()
+          child.show()
+
+          child.on('closed', function () {
+            // Dereference the window object, usually you would store windows
+            // in an array if your app supports multi windows, this is the time
+            // when you should delete the corresponding element.
+            child = null
+          })
+
+          setTimeout(function() {
+            child.webContents.send('tree-data', bomData)
+          }, 1000)
+        }
       },
       {
         label: '件號查詢'
@@ -315,3 +334,8 @@ ipc.on('setting-library-path', function (event) {
 ipc.on('back2index', function (event) {
   mainWindow.loadURL(`file://${__dirname}/app/index.html`)
 });
+
+ipc.on('bom-data', function(event, data) {
+  console.log("bomdata", JSON.stringify(data))
+  bomData = data
+})

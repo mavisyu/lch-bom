@@ -64,6 +64,8 @@ ipc.on('grid-data',function(event, level0, level1, level2) {
     var grid = newGrid(el, data);
     grid.render();
   }) ($("#grid"));
+
+  ipc.send('bom-data', data)
 });
 
 ipc.on('grid-data-txt',function(event, txtData) {
@@ -105,6 +107,8 @@ ipc.on('grid-data-txt',function(event, txtData) {
     var grid = newGrid(el, data);
     grid.render();
   }) ($("#grid"));
+
+  ipc.send('bom-data', data)
 });
 
 ipc.on('export-excel',function(event, path) {
