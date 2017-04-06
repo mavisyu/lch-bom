@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>lch BOM</title>
+
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="http://skinnybrit51.com/editable-grid/dist/editable_grid.min.css">
+  <script>
+      window.$ = window.jQuery = require('jquery');
+  </script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <style>
+    table{
+      font-family:Microsoft JhengHei, PMingLiU;
+    }
+    td{
+      width:700px;
+      table-layout:fixed;
+    }
+  </style>
+
+</head>
+<body>
+
+<!--<div class="bs-example">-->
+  <!--<nav id="myNavbar" class="navbar navbar-default" role="navigation">-->
+    <!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+    <!--<div class="container">-->
+      <!--<div class="navbar-header">-->
+        <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">-->
+          <!--<span class="sr-only">Toggle navigation</span>-->
+          <!--<span class="icon-bar"></span>-->
+          <!--<span class="icon-bar"></span>-->
+          <!--<span class="icon-bar"></span>-->
+        <!--</button>-->
+        <!--<a class="navbar-brand" href="#">連結油壓</a>-->
+      <!--</div>-->
+      <!--&lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+      <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+        <!--<ul class="nav navbar-nav">-->
+          <!--<li class="dropdown">-->
+            <!--<a href="#" data-toggle="dropdown" class="dropdown-toggle">檔案(X) <b class="caret"></b></a>-->
+            <!--<ul class="dropdown-menu">-->
+              <!--<li><a href="#">開啟料單文字檔(S)</a></li>-->
+              <!--<li><a href="#" id="select-directory">開啟 3D-Excel 檔(3)</a></li>-->
+              <!--<li class="divider"></li>-->
+              <!--<li><a href="#">儲存成文字檔(W)</a></li>-->
+              <!--<li><a href="#">儲存成 Excel 檔</a></li>-->
+            <!--</ul>-->
+          <!--</li>-->
+          <!--<li class="dropdown">-->
+            <!--<a href="#" data-toggle="dropdown" class="dropdown-toggle">標準件(Y) <b class="caret"></b></a>-->
+            <!--<ul class="dropdown-menu">-->
+              <!--<li><a href="#">標準件列印(X)</a></li>-->
+              <!--<li><a href="#">標準件清單(Z)</a></li>-->
+            <!--</ul>-->
+          <!--</li>-->
+          <!--<li class="dropdown">-->
+            <!--<a href="#" data-toggle="dropdown" class="dropdown-toggle">樹狀圖查詢(Z) <b class="caret"></b></a>-->
+            <!--<ul class="dropdown-menu">-->
+              <!--<li><a href="#">料號查詢(V)</a></li>-->
+              <!--<li><a href="#">件號查詢(W)</a></li>-->
+            <!--</ul>-->
+          <!--</li>-->
+          <!--<li class="dropdown">-->
+            <!--<a href="#" data-toggle="dropdown" class="dropdown-toggle">報表 <b class="caret"></b></a>-->
+            <!--<ul class="dropdown-menu">-->
+              <!--<li><a href="#">列印材料單(T)</a></li>-->
+              <!--<li><a href="#">列印分發紀錄表(U)</a></li>-->
+              <!--<li><a href="#">列印設計課清單表(X)</a></li>-->
+            <!--</ul>-->
+          <!--</li>-->
+          <!--<li class="dropdown">-->
+            <!--<a href="#" data-toggle="dropdown" class="dropdown-toggle">設定 <b class="caret"></b></a>-->
+            <!--<ul class="dropdown-menu">-->
+              <!--<li><a href="#">標準件號資料庫</a></li>-->
+              <!--<li><a href="#">ERP 料號庫</a></li>-->
+              <!--<li><a href="#">來源別資料庫</a></li>-->
+              <!--<li class="divider"></li>-->
+              <!--<li><a href="settings.html">系統設定</a></li>-->
+            <!--</ul>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+    <!--</div>-->
+  <!--</nav>-->
+<!--</div>-->
+
+<table>
+  <tr>
+    <td><input type="checkbox" name="include-standard-case"> 含標準件</td>
+    <td>材料單備註 <input type="text" id="material-note"></td>
+  </tr>
+  <tr>
+    <td>製造編號 <input type="text" id="manufacture-num"></td>
+    <td>客戶簡稱 <input type="text" id="client-abbre"></td>
+    <td>機台數量 <input type="number" id="machine-num"></td>
+  </tr>
+  <tr>
+    <td>上屬編號 <input type="text" id="upper-num"></td>
+    <td>上署名稱 <input type="text" id="upper-name"></td>
+    <td>製表人員
+      <select id="in-charge">
+        <option value="吳鑫元">吳鑫元</option>
+        <option value="呂玉琴">呂玉琴</option>
+        <option value="李志高">李志高</option>
+        <option value="林慶宏">林慶宏</option>
+        <option value="施宗呈">施宗呈</option>
+        <option value="張建文">張建文</option>
+        <option value="梁深造">梁深造</option>
+        <option value="許志誠">許志誠</option>
+        <option value="游郁靜">游郁靜</option>
+        <option value="黃世宗">黃世宗</option>
+        <option value="黃則盛">黃則盛</option>
+        <option value="黃偉哲">黃偉哲</option>
+        <option value="黃陳文">黃陳文</option>
+        <option value="楊至傑">楊至傑</option>
+        <option value="廖正義">廖正義</option>
+        <option value="闕建長">闕建長</option>
+        <option value="胡生文">胡生文</option>
+      </select>
+    </td>
+  <tr>
+    <td>組件編號 <input type="text" id="assemble-num"></td>
+    <td>組件名稱 <input type="text" id="assemble-name"></td>
+    <td>單台組數 <input type="number" id="single-num"></td>
+    <td>圖號 <input type="text" id="pic-num"></td>
+    <td>圖格
+      <select id="pic-cell">
+        <option value="A1">A1</option>
+        <option value="A2">A2</option>
+        <option value="A3">A3</option>
+        <option value="A4">A4</option>
+      </select>
+    </td>
+  </tr>
+</table>
+
+<div id="grid"></div>
+</body>
+
+<script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+</script>
+</html>

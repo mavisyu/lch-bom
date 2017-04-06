@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>設定</title>
+
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap-theme.css">
+  <script>
+    window.$ = window.jQuery = require('jquery');
+  </script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+  <div class="container">
+    <form class="form-inline">
+      <!--<div class="form-group">-->
+        <label for="erp-material">ERP 料號</label>
+        <input type="text" class="form-control" id="erp-material" placeholder="ERP 料號" style="width: 50%;">
+        <button type="button" class="btn btn-primary" id="save">存檔</button>
+        <a class="btn btn-default" href="../index.html">回主畫面</a>
+      <!--</div>-->
+    </form>
+  </div>
+  <div class="container" style="padding-top: 10px;">
+    <div class="table-responsive">
+      <table id="table" class="table table-striped">
+        <tr><th>ERP 料號</th></tr>
+      </table>
+    </div>
+  </div>
+  <div class="container">
+    <!--<button type="button" class="btn btn-primary" id="save">存檔</button>-->
+    <a class="btn btn-default" href="../index.html">回主畫面</a>
+  </div>
+</body>
+<script>
+  // You can also require other files to run in this process
+  require('./erp_material.js')
+</script>
+</html>

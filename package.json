@@ -1,22 +1,28 @@
 {
-  "name": "electron-quick-start",
+  "name": "lch-bom",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "An application for lch BOM",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
+  "author": "Mavis",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^1.4.1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "editable-grid": "^2.0.5",
+    "electron-pdf-window": "^1.0.9",
+    "electron-tree-view": "^1.1.0",
+    "lodash": "^4.17.2",
+    "moment": "^2.17.1",
+    "moment-timezone": "^0.5.11",
+    "mv": "^2.1.1",
+    "nedb": "^1.8.0",
+    "pdfmake": "^0.1.25",
+    "source-han-sans-sc-ttf": "^1.0.0",
+    "xlsx": "^0.8.0"
   }
 }
